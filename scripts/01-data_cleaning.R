@@ -1,7 +1,3 @@
-comments
-Code 
-notes for Krupali and Adam
-
 #### Preamble ####
 # Purpose: Prepare the 2021 GSS data
 # Author: Adam Labas and Krupali Bhavsar
@@ -26,9 +22,15 @@ names(raw_data)
 reduced_data <- 
   raw_data %>% 
   select(age, 
-         sexnow1) over here we have to pic what variables/columns we want to keep
-rm(raw_data)
+         sexnow1,
+         born,
+         marital,
+         educ,
+         divorce,
+         degree)
 
+rm(raw_data)
+#over here we have to pic what variables/columns we want to keep
 
 #### What's next? ####
 
