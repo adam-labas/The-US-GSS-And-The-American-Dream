@@ -1,14 +1,15 @@
+comments
+Code 
+notes for Krupali and Adam
+
 #### Preamble ####
-# Purpose: Clean the survey data downloaded from [...UPDATE ME!!!!!]
-# Author: Rohan Alexander [CHANGE THIS TO YOUR NAME!!!!]
-# Data: 3 January 2021
-# Contact: rohan.alexander@utoronto.ca [PROBABLY CHANGE THIS ALSO!!!!]
-# License: MIT
+# Purpose: Prepare the 2021 GSS data
+# Author: Adam Labas and Krupali Bhavsar
+# Data: March 20 2022
+# Contact: adam.labas@mail.utoronto.ca and krupali.bhavsar@mail.utoronto.ca
+# License: 
 # Pre-requisites: 
-# - Need to have downloaded the ACS data and saved it to inputs/data
-# - Don't forget to gitignore it!
-# - Change these to yours
-# Any other information needed?
+# - Need to have downloaded the GSS data and saved it to inputs/data
 
 
 #### Workspace setup ####
@@ -16,21 +17,19 @@
 library(haven)
 library(tidyverse)
 # Read in the raw data. 
-raw_data <- readr::read_csv("inputs/data/raw_data.csv"
-                     )
+raw_data <- haven::read_dta("inputs/data/2021_stata/gss2021.dta")
+
 # Just keep some variables that may be of interest (change 
 # this depending on your interests)
 names(raw_data)
 
 reduced_data <- 
   raw_data %>% 
-  select(first_col, 
-         second_col)
+  select(age, 
+         sexnow1) over here we have to pic what variables/columns we want to keep
 rm(raw_data)
-         
+
 
 #### What's next? ####
-
-
 
          
