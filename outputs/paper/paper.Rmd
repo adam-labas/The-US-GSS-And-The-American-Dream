@@ -1,6 +1,6 @@
 ---
-title: "My titleXXXXXXXXXXXXXXXX"
-subtitle: "My subtitle if needed"
+title: "Income Has Serious Implications On Many Facets of American Life in 2021"
+subtitle: "A Look Into The Implications of Americans' Incomes Reveals Information On Disparity of The Gender Pay and the American Dream."
 author: 
   - Adam Labas  
   - Krupali Bhavsar
@@ -13,11 +13,17 @@ toc: FALSE
 bibliography: references.bib
 ---
 
-```{r setup, include=FALSE}
+```{r setup, fig.pos = "!H", include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 
 library(tidyverse)
-library(palmerpenguins)
+library(janitor)
+library(dplyr)
+library(tidyr)
+library(opendatatoronto)
+library(knitr)
+library(patchwork)
+library(lubridate)
 ```
 
 # Introduction
@@ -28,33 +34,13 @@ You can and should cross-reference sections and sub-sections. For instance, Sect
 
 # Data
 
-Our data is of penguins (Figure \@ref(fig:bills)).
+In this Data Section \@ref(data), we will provide a look into the data acquisition and processing methodology as well as a deep dive into the contents of the data. First of, (Table \@ref(tab:tableofdata)) give us a glimpse of the data.
 
-```{r bills, fig.cap="Bills of penguins", echo = FALSE}
-ggplot(penguins, aes(x = island, fill = species)) +
-  geom_bar(alpha = 0.8) +
-  scale_fill_manual(values = c("darkorange","purple","cyan4"),
-                    guide = FALSE) +
-  theme_minimal() +
-  facet_wrap(~species, ncol = 1) +
-  coord_flip()
-```
 
-Talk more about it.
+## Data Collection
 
-Also bills and their average (Figure \@ref(fig:billssssss)). (Notice how you can change the height and width so they don't take the whole page?)
+All of the data used in this analysis was directly collected from the United States 2021 General Social Survey, available here: https://gss.norc.org/ (link and additional information available in the README.md file.) We downloaded the desired data in the STATA format. The zip file acquired included 4 files: a read me text file, the raw data as a dta file, as well as two pdf files. *GSS 2021 Codebook R1b* is essentially the instruction manual for the data set. It does over 
 
-```{r billssssss, fig.cap="More bills of penguins", echo = FALSE, fig.width=8, fig.height=4}
-
-# This needs to be about the random data tha tI sasmpled?
-ggplot(penguins, aes(x = island, fill = species)) +
-  geom_bar(alpha = 0.8) +
-  scale_fill_manual(values = c("darkorange","purple","cyan4"),
-                    guide = FALSE) +
-  theme_minimal() +
-  facet_wrap(~species, ncol = 1) +
-  coord_flip()
-```
 
 Talk way more about it. 
 
