@@ -4,7 +4,7 @@ subtitle: "A Look Into The Implications of Americans' Incomes Reveals Informatio
 author: 
   - Adam Labas  
   - Krupali Bhavsar
-thanks: "Code and data are available at: XXXXXXXXXXXXXXXXXXXXXXX"
+thanks: "Code and data are available at: https://github.com/adam-labas/The-US-GSS-And-The-American-Dream"
 date: "`r format(Sys.time(), '%d %B %Y')`"
 abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
 output:
@@ -68,6 +68,8 @@ All of the data used in this analysis was directly collected from the United Sta
 ## Problem With Data Upload into R Studio
 We know that having a reproducible workflow is crucial if we want to produce mature and ethical statistical papers which any data scientist down the line can reproduce for any purpose from verifying results or modifying methodology. As previously stated, the raw data provided by the United States 2021 General Social Survey was in a zip folder and in dta format. To conduct the development of this paper, we worked in RStudio {@citeR) in a server developed, maintained an administered by one of the TAs for the STA304 Course at the University of Toronto (Winter 2022), Mauricio Vargas Sepúlveda, better known as Pachá. This server works just like any other server for RStudio like JupyterHub but the admin user, Pachá, has the ability to overview all activity on the server and access users accounts to aid with trouble shooting or data sharing: this will proved to be decisive in just a moment. When we tried to follow typical procedure to upload the 2021_stata.zip file into under data in the inputs folder, we received a message we had never received before. Figure 1 is a screen capture of that error.
 ![The Error received upon attempting to upload the zip folder](~/paper_3_team_paper/inputs/2021_stata_error_message.png "The error message we received when trying to upload the zip folder.")
+
+{ width="800" height="600" style="display: block; margin: 0 auto" }
 
 This was hard for us to wrap our heads around as we were able to upload other files independently, and crucially we were able to upload the other file in the zip independently aside from the dta file. We tried to replicate this problem working in RStudio locally but surprisingly it was not a problem there. As such, we contacted the server admin, shared the zip folder with him, and using his administrator permissions, he uploaded the unzipped folder into a shared folder that the entire class has access to. We then copped this folder into the data folder under inputs. It is important to note that throughout this process, none of the information from the zip folder had been altered or manipulated and that all the information, and only the information, which had started in it, ended up in our instance of RStudio.
 
@@ -137,7 +139,7 @@ income16_gender
 ```
 In this graph (Figure \@ref(fig:figure-1)), we can proportions of family income when the responded was 16 years of age. We also see that an over-whelming majority of people in our sample had an income of over $40,000. We also see that the single largest individual group is the *NA* group. We will discuss the implications of this in Section \@ref(limitations). As we've previously discussed, when the questioned is prompted with a question, in every situation, they have the option to refuse to answer the question or say that they do not know. The both of these are listed as NA responses. We also see that of the 5 possible genders (including the NA gender, not to be confused with the NA response to income16), the overwhelming majority of respondents identified as male or female as expected.
 
-We would like to contrast this with the current income of responds. The below is the same graph above but we've also included a similar graph but for family income at the time of response 
+We would like to contrast this with the current income of responds. The below is the same graph above but we've also included a similar graph but for family income at the time of response.
 ```{r figure2, fig.cap="write a figure caption here", echo = FALSE, fig.width=12, fig.height=10, message = F, warning = F}
 #income16 vs income grouped by gender
 
@@ -164,8 +166,13 @@ income16_gender/income_gender
 In figure \@ref(fig:figure-2), we see the overlapping of the two graphs, the first of which is the same as figure \@ref(fig:figure-1) and the bottom one is the same in essence but with the information for current family income instead of at age 16. The first and most striking part of this visual is that for the current income, the highest threshold is $25,000 or more. We see that the both of our graphs are heavily skewed to wards higher incomes. I suspect that this is mainly a production of the bin widths decided on for the analysis. 
 
 ## Implications 1
-In Visuals \@ref(visual-1) we can see when we look into income16 that the majority of people claimed that at the age of 16, their family income was over 40 thousand dollars. When we lookover at the income variable, we are trully perplexed to see that the largest is 25 thousand or more. We will discuss the implications of the latter in Section \@ref(limitations). We can also see that the number of NA responses rises from about 530 in the case of the income at age 16 variable to approximately 900 in the income variable. This seems counter intuitive as it would appear that less people are uncertain about their family income at age 16 than they are. We suspect however that this is not true. We suspect that there could be a possible shame or embarassment assosociated with sharing ones current faily income as it represents the persons way of living or lifestyle today. On the other hand, someones incomeat age 16 is psychologically less of importance to them and carries no burden in their life, as it is notan expected metric of succes year down the line. We also recognize that amongst men and women, there is a general 
+In Visuals \@ref(visual-1) we can see when we look into income16 that the majority of people claimed that at the age of 16, their family income was over 40 thousand dollars. When we look over at the income variable, we are truly perplexed to see that the largest is 25 thousand or more. We will discuss the implications of the latter in Section \@ref(limitations). We can also see that the number of NA responses rises from about 530 in the case of the income at age 16 variable to approximately 900 in the income variable. This seems counter intuitive as it would appear that less people are uncertain about their family income at age 16 than they are. We suspect however that this is not true. We suspect that there could be a possible shame or embarrassment associated with sharing ones current family income as it represents the persons way of living or lifestyle today. When we speak of the American dream, we implicitly assume an increase in wealth over time and for someone who isn't as wealthy as they might want to be (likely an overwhelming large portion of the population), reluctance with sharing their current income is totally understandable. On the other hand, someones income at age 16 is psychologically less of importance to them and carries no burden in their life, as it is not an expected metric of success years down the line. We also recognize that among men and women, there is a general almost a 50:50 split at each level of income but we do notice that for income level NA, a lot of people chose not to identify their gender. It would be interesting in another analysis to analyse possible evidences of gender pay gap and how people who do not fit in the *traditional* gender roles are affected by the advent of the American Dream and whether or not their position in life hinders their ability to increse in wealth over time. 
 
+As we speak about an increase in wealth over time, we next want to see if the birth place of ones grandparents has any impact on income due to the so called *generational wealth*.
+
+## Visual 2
+As weve previously stated, the American
+\@ref(visual-2)
 
 ```{r, fig.cap="write a figure caption here", echo = FALSE, fig.width=12, fig.height=10, message = F, warning = F}
 #fincome16 vs income grouped by where grandparents were born
@@ -216,20 +223,7 @@ income_born <- ggplot(mapping = aes(x = factor(income_cat, level = level_income)
 income16_born/income_born
 ```
 
-```{r, fig.cap="write a figure caption here", echo = FALSE, fig.width=9, fig.height=6, message = F, warning = F}
-#income at 16 vs current income grouped by where individual was born
 
-income_income16_born <- ggplot(mapping = aes(x = income_cat, y = income16_cat, color = born), data = reduced_data) +
-  geom_point() +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90)) +
-  labs(x = "Current Family Income",
-       y = "Family Income at Age 16",
-       color = "Born in The USA",
-       title = "Relationship Between Family Income at age 16 and Current Family Income")
-
-income_income16_born
-```
 
 
 
@@ -254,8 +248,6 @@ Weaknesses and next steps should also be included.
 
 # Appendix {-}
 
-
-# Additional details
 
 
 \newpage
