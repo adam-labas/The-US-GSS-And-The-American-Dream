@@ -1,6 +1,6 @@
 ---
 title: "Income Has Serious Implications On Many Facets of American Life in 2021"
-subtitle: "A Look Into The Implications of Americans' Incomes Reveals Information On Disparity of The Gender Pay and the American Dream."
+subtitle: "A Look Into The Implications of Americans' Incomes Reveals Information On The Veracity of American Dream."
 author: 
   - Adam Labas  
   - Krupali Bhavsar
@@ -9,14 +9,14 @@ date: "`r format(Sys.time(), '%d %B %Y')`"
 abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
 output:
   bookdown::pdf_document2
-toc: FALSE
+toc: TRUE
 bibliography: references.bib
 ---
 
 ```{r setup, fig.pos = "!H", include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-install.packages("tinytex")
-tinytex::install_tinytex()
+# install.packages("tinytex")
+# tinytex::install_tinytex()
 library(tinytex)
 library(tidyverse)
 library(janitor)
@@ -25,6 +25,9 @@ library(tidyr)
 library(knitr)
 library(patchwork)
 library(lubridate)
+
+reduced_data <- read_csv(here::here("inputs/data/reduced_data.csv"))
+
 ```
 
 # Introduction
@@ -36,6 +39,26 @@ You can and should cross-reference sections and sub-sections. For instance, Sect
 # Data
 
 In this Data Section \@ref(data), we will provide a look into the data acquisition and processing methodology as well as a deep dive into the contents of the data. First of, (Table \@ref(tab:tableofdata)) give us a glimpse of the data.
+
+
+
+```{r echo = F}
+#table of variables that I am concerned with
+
+
+reduced_data[complete.cases(reduced_data), ] %>%
+   slice(1:7) %>%
+  kable(
+    caption = "GSS Cleaned Data",
+    col.names = c("Row Number", "Age", "Gender", "Born", "Marital Status", "Education", 
+                  "Divorce Status", "Degree", "Current Income", "Health Care", "Birth Year", 
+                  "First Born", "Income at 16", "Grandparents", "Category for Income at 16", 
+                  "Caegory for Current Income"),
+    digits = 1,
+    booktabs = TRUE,  
+    linesep = "")
+```
+
 
 
 ## Data Collection
@@ -58,7 +81,7 @@ All the data processing, cleaning and variable selection takes place in an R scr
 
 After loading the data into our local environment and saving its as a cvs called raw.csv, we began to create as subset of the data with the desired variables. There are 565 variables in the data and we obviously can't explain each of them, so here is a description of some of the variables we chose to work with. *sexnow1* is the current sex of the respondent and is a concept more similar to gender, *age*, *born*: born in America or not, *marital*: the marital status, *educ*: the highest attained level of education, *divorce*: divroced or not, whether or not they have a *degree*, *income*: their current family income, *income16*: their family income when they were 16 years old, *nathealy*: if they think enough is done for healthcare, *cohort*: year of birth, *agekdbrn*: age when first child was born and lastly, *granborn* which is a number from 0-4 signifying the number of grandparents of the respondent which were born in the united states.
 
-Additionally, we created a new column called *income_cat* and *income16_cat* which are new variables which offer us the liberty of using the *income* and *income16* variables but as discreet, categorical variables instead of the coded numerical system used all throughout the data set and explained in the information code book titled *GSS 2021 Codebook R1b.pdf* available in the 2021_stata in the data folder in inputs.This was done by duplicating the original columns and then re-coding the values. In the case of *income* for instance, the codebook explains that a value of 1 for income means the response was that the annual income was less than \$1000. As such, income_cat would read *$1,000 AND UNDER*. Similar mutations were done for the variables *sex*, *granborn*, *nathealy* and *born*.
+Additionally, we created a new column called *income_cat* and *income16_cat* which are new variables which offer us the liberty of using the *income* and *income16* variables but as discreet, categorical variables instead of the coded numerical system used all throughout the data set and explained in the information code book titled *GSS 2021 Codebook R1b.pdf* available in the 2021_stata in the data folder in inputs.This was done by duplicating the original columns and then re-coding the values. In the case of *income* for instance, the code book explains that a value of 1 for income means the response was that the annual income was less than \$1000. As such, income_cat would read *$1,000 AND UNDER*. Similar mutations were done for the variables *sex*, *granborn*, *nathealy* and *born*.
 
 We finished off by saving all the changed in a new data set: reduced_data.csv
 
@@ -69,13 +92,129 @@ In matters of reproducibility, the methodology used to collect data is always im
 
 ## Methodology Overview
 
-The 2021 GSS is in many ways different to the previous General Social Surveys in years prior to the ascension of the corona virus to international stardom. According to the GSS 2021 Codebook R1b, in previous iterations of the GSS, the survey was taken solely via in-person interview, where the interviewer had been adequately trained and prepared for various situations that would have arose like non responds or the person being interviewed not knowing an answer. However, for reasons related to health and safety protocols and "to safeguard the health of staff and respondents during the COVID-19 pandemic, the 2021 GSS data collection used a mail-to-web methodology instead of its traditional in-person interviews." This means that after being selected via address based sampling the selected individuals "interview" would be conducted online via a self administered questionnaire. 
+The 2021 GSS is in many ways different to the previous General Social Surveys in years prior to the ascension of the corona virus to international stardom. According to the GSS 2021 Codebook R1b, in previous iterations of the GSS, the survey was taken solely via in-person interview, where the interviewer had been adequately trained and prepared for various situations that would have arose like non responds or the person being interviewed not knowing an answer. However, for reasons related to health and safety protocols and "to safeguard the health of staff and respondents during the COVID-19 pandemic, the 2021 GSS data collection used a mail-to-web methodology instead of its traditional in-person interviews." This means that after being selected via address based sampling the selected individuals "interview" would be conducted online via a self administered questionnaire. The limitations of such will later be discussed in Section \@ref(limitations)
 
-## Key features
+## Key features 
+
+It is important to discuss the reach of our data. We know from the provided documentation that the population group eligible for taking the survey are Adults 18 or older in the United States who live in non institutional housing at the time of interviewing. Also, the 2021 GSS  uses the last birthday method to decide which individual in the household will take the survey. This was done by having "a professional phone interviewer team conducted phone outreach to complete screeners, answer inbound phone calls from sampled households, identify respondents, and complete interviews by phone and/or prompt them to complete the web survey." As far as the invitation method goes for data collection, materials that provide a web link to invite people to participate in the survey was mailed out and an option to conduct the interview via the phone instead of a self-administered questionnaire was also provided. Out of the 27,591 lines of sample (people who had been prompted to answer the questionnaire), 4,032 responses were collected. This has implications on the finding of our analysis in Section \@ref(results) as we will have to consider if we are able to generalize our finding from the relatively small sample that we have to the population if all US citizens over 18 years old. The small sample size and extremely long survey are both weaknesses of the survey which we will discuss in more depth in Section \@ref(results).
+
+In addition, the 2021 GSS used census data as well as publicly available information to try and identify areas and specific household with Spanish speakers whereby the survey was then offered in English and in Spanish. This is a big strength of the survey at it shows the attempt of the data analyst to be as mature and ethical as possible and offer the survey in a language that is more suitable for a large portion of US citizens.
 
 
 
 # Results
+
+```{r}
+#creating levels for the x and y axis on the graphs
+
+level_income16 <- c("$1,000 AND UNDER","$1,000 TO $2,999","$3,000 TO $3,999",
+                    "$4,000 TO $4,999","$5,000 TO $5,999","$6,000 TO $6,999",
+                    "$7,000 TO $7,999","$8,000 TO $9,999","$10,000 TO $12,499",
+                    "$12,500 TO $14,999", "$15,000 TO $17,499","$17,500 TO $19,999",
+                    "$20,000 TO $22,499","$22,500 TO $24,999","$25,000 TO $29,999",
+                    "$30,000 TO $34,999","$35,000 TO $39,999","$40,000 TO $49,999",
+                    "$50,000 TO $59,999","$60,000 TO $74,999","$75,000 TO $89,999",
+                    "$90,000 TO $109,999","$110,000 TO $129,999","$130,000 TO $149,999",
+                    "$150,000 TO $169,999","$170,000 OR OVER")
+
+level_income <- c("$1,000 AND UNDER","$1,000 TO $2,999","$3,000 TO $3,999",
+                    "$4,000 TO $4,999","$5,000 TO $5,999","$6,000 TO $6,999",
+                    "$7,000 TO $7,999","$8,000 TO $9,999","$10,000 TO $14,999",
+                    "$15,000 TO $19,999","$20,000 TO $24,999","$25,000 OR MORE")
+```
+
+
+```{r fig1, fig.cap="write a figure caption here", echo = FALSE, fig.width=12, fig.height=10, echo=FALSE}
+#income16 vs income grouped by gender
+
+income16_gender <- ggplot(mapping = aes(x = factor(income16_cat, level = level_income16), group = sex, fill = sex), data = reduced_data) +
+  geom_bar(alpha = 0.7)  +
+  theme_minimal() +
+  labs(x = "Family Income at 16 Years Old",
+       y = "Number of occurrences",
+       fill = "Gender",
+       title = "Total Family Income at 16 Grouped by Gender") +
+  coord_flip()
+
+income_gender <- ggplot(mapping = aes(x = factor(income_cat, level = level_income), group = sex, fill = sex), data = reduced_data) +
+  geom_bar(alpha = 0.7)  +
+  theme_minimal() +
+  labs(x = "Family Income",
+       y = "Number of occurrences",
+       fill = "Gender",
+       title = "Total Family Income Grouped by Gender") +
+  coord_flip()
+
+income16_gender/income_gender
+```
+
+```{r, fig.cap="write a figure caption here", echo = FALSE, fig.width=12, fig.height=10, echo=FALSE}
+#fincome16 vs income grouped by where grandparents were born
+
+income16_grand <- ggplot(mapping = aes(x = factor(income16_cat, level = level_income16), group = granborn, fill = granborn), data = reduced_data) +
+  geom_bar(alpha = 0.7)  +
+  theme_minimal() +
+  labs(x = "Family Income at 16 Years Old",
+       y = "Number of occurrences",
+       fill = "Grandparents",
+       title = "Total Family Income at 16 Grouped by Grandparent Birthplace") +
+  coord_flip()
+
+income_grand <- ggplot(mapping = aes(x = factor(income_cat, level = level_income), group = granborn, fill = granborn), data = reduced_data) +
+  geom_bar(alpha = 0.7)  +
+  theme_minimal() +
+  labs(x = "Family Income",
+       y = "Number of occurrences",
+       fill = "Grandparents",
+       title = "Total Family Income Grouped by Grandparent Birthplace") +
+  coord_flip()
+
+income16_grand/income_grand
+```
+
+
+```{r, fig.cap="write a figure caption here", echo = FALSE, fig.width=12, fig.height=10, echo=FALSE}
+#family income at 16 grouped by where individual was born
+
+income16_born <- ggplot(mapping = aes(x = factor(income16_cat, level = level_income16), group = born, fill = born), data = reduced_data) +
+  geom_bar(alpha = 0.7)  +
+  theme_minimal() +
+  labs(x = "Total Family Income at 16 Years Old",
+       y = "Number of occurrences",
+       fill = "Born",
+       title = "Total Family Income at 16 Grouped by individual’s Birthplace") +
+  coord_flip()
+
+income_born <- ggplot(mapping = aes(x = factor(income_cat, level = level_income), group = born, fill = born), data = reduced_data) +
+  geom_bar(alpha = 0.7)  +
+  theme_minimal() +
+  labs(x = "Total Family Income",
+       y = "Number of occurrences",
+       fill = "Born",
+       title = "Total Family Income Grouped by individual’s Birthplace") +
+  coord_flip()
+
+income16_born/income_born
+```
+
+```{r, fig.cap="write a figure caption here", echo = FALSE, fig.width=9, fig.height=6, echo=FALSE}
+#income at 16 vs current income grouped by where individual was born
+
+income_income16_born <- ggplot(mapping = aes(x = income_cat, y = income16_cat, color = born), data = reduced_data) +
+  geom_point() +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90)) +
+  labs(x = "Current Family Income",
+       y = "Family Income at Age 16",
+       color = "Born in The USA",
+       title = "Relationship Between Family Income at age 16 and Current Family Income")
+
+income_income16_born
+```
+
+
+
+
 
 # Discussion
 
