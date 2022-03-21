@@ -33,17 +33,14 @@ reduced_data <-
   select(age, 
          sexnow1,
          born,
-         marital,
          educ,
-         divorce,
-         degree,
          income,
-         nathealy,
          cohort,
-         agekdbrn,
          income16,
          granborn) %>% 
   rename(sex = sexnow1)
+
+
 
 reduced_data$income16_cat <- reduced_data$income16
 reduced_data$income_cat <- reduced_data$income

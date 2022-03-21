@@ -37,27 +37,25 @@ You can and should cross-reference sections and sub-sections. For instance, Sect
 
 
 # Data
-
 In this Data Section \@ref(data), we will provide a look into the data acquisition and processing methodology as well as a deep dive into the contents of the data. First of, (Table \@ref(tab:tableofdata)) give us a glimpse of the data.
-
-
-
 ```{r echo = F}
-#table of variables that I am concerned with
+#table of variables that i am concerned with
+data_table <- reduced_data[,-c(1,6,8)]
 
-
-reduced_data[complete.cases(reduced_data), ] %>%
+data_table[complete.cases(data_table), ] %>%
    slice(1:7) %>%
   kable(
     caption = "GSS Cleaned Data",
-    col.names = c("Row Number", "Age", "Gender", "Born", "Marital Status", "Education", 
-                  "Divorce Status", "Degree", "Current Income", "Health Care", "Birth Year", 
-                  "First Born", "Income at 16", "Grandparents", "Category for Income at 16", 
-                  "Caegory for Current Income"),
+    col.names = c("Age", "Gender", "Born", 
+                  "Education", 
+                  "Birth Year", "Grandparents", 
+                  "Income at 16","Current Income"),
     digits = 1,
     booktabs = TRUE,  
     linesep = "")
+
 ```
+
 
 
 
@@ -104,7 +102,7 @@ In addition, the 2021 GSS used census data as well as publicly available informa
 
 
 # Visualizing the Data and The Implications
-In this analysis, I am interested at looking at how real the American Dream is and if it is found to be possible, whether or not there is any difference in attainment amoung genders. As such, in this Section \@ref(visualizing-the-data-and-the-implications), we will create various visuals which will enable us to extract as much information as we can and we will speak about the implications that they make.
+In this analysis, we am interested at looking at how real the American Dream is and if it is found to be possible, whether or not there is any difference in attainment amoung genders. As such, in this Section \@ref(visualizing-the-data-and-the-implications), we will create various visuals which will enable us to extract as much information as we can and we will speak about the implications that they make.
 ```{r, echo = F, message = F, include = F}
 #creating levels for the x and y axis on the graphs
 
@@ -162,7 +160,7 @@ income_gender <- ggplot(mapping = aes(x = factor(income_cat, level = level_incom
 
 income16_gender/income_gender
 ```
-In figure \@ref(fig:figure-2), we see the overlapping of the two graphs, the first of which is the same as figure \@ref(fig:figure-1) and the bottom one is the same in essence but with the information for current family income instead of at age 16. The first and most striking part of this visual is that for the current income, the highest threshold is $25,000 or more. We see that the both of our graphs are heavily skewed to wards higher incomes. I suspect that this is mainly a production of the bin widths decided on for the analysis. 
+In figure \@ref(fig:figure-2), we see the overlapping of the two graphs, the first of which is the same as figure \@ref(fig:figure-1) and the bottom one is the same in essence but with the information for current family income instead of at age 16. The first and most striking part of this visual is that for the current income, the highest threshold is $25,000 or more. We see that the both of our graphs are heavily skewed to wards higher incomes.wesuspect that this is mainly a production of the bin widths decided on for the analysis. 
 
 ## Implications 1
 In Visuals \@ref(visual-1) we can see that when we look into income16  the majority of people claimed that at the age of 16, their family income was over 40 thousand dollars. When we look over at the income variable, we are truly perplexed to see that the largest bin is 25 thousand or more. We will discuss the implications of the latter in Section \@ref(limitations). We can also see that the number of NA responses rises from about 530 in the case of the income at age 16 variable to approximately 900 in the income variable. This seems counter intuitive as it would appear that less people are uncertain about their family income at age 16 than they are now. We suspect however that this is not true. We suspect that there could be a possible shame or embarrassment associated with sharing ones current family income as it represents the persons way of living or lifestyle today. When we speak of the American dream, we implicitly assume an increase in wealth over time and for someone who isn't as wealthy as they might want to be (likely an overwhelming large portion of the population), reluctance with sharing their current income is totally understandable. On the other hand, someones income at age 16 is psychologically less of importance to them and carries no burden in their life, as it is not an expected metric of success years down the line. We also recognize that among men and women, there is in general almost a 50:50 split at each level of income but we do notice that for income level NA, a lot of people chose not to identify their gender. It would be interesting in another analysis to analyse possible evidences of gender pay gap and how people who do not fit in the *traditional* gender roles are affected by the advent of the American Dream and whether or not their position in life hinders their ability to increase in wealth over time. 
@@ -196,9 +194,9 @@ income16_grand/income_grand
 ```
 
 ## Implications 2
-In the above visuals, we can see that in all the income groupings for both age 16 and current income, the largest subgrouping within each is people who have no grandparents born in the United states. The second largest group are usually those with 2 grandparents born in the United States. It is pretty logical that 2 grandparents follows after zero grandparents as it is easy to recognize that most people do not go abroad to marry and marry a friend or someone that they know locally, who is most likely to be born in the united states. We would speculate that a similar trend can be observed in other *immigrant* countries Like Canada or Sweeden. What is the most fascinating however is that the vast majority of people who answered the survey are first or second generation Americans, perhaps having grandparents or parents who immigrated to this country chasing the American Dream. 
+In the above visuals, we can see that in all the income groupings for both age 16 and current income, the largest sub grouping within each is people who have no grandparents born in the United states. The second largest group are usually those with 2 grandparents born in the United States. It is pretty logical that 2 grandparents follows after zero grandparents as it is easy to recognize that most people do not go abroad to marry and marry a friend or someone that they know locally, who is most likely to be born in the United States. We would speculate that a similar trend can be observed in other *immigrant* countries like Canada or Sweden. What is the most fascinating however, is that the vast majority of people who answered the survey are first or second generation Americans, perhaps having grandparents or parents who immigrated to this country chasing the American Dream. 
 
-In a similar fashion to what was explained in \@ref(implications-1), both of our graphs are heavily skewed towards higher income. In the case of current income, it is almost certainly because of the bin width decided on by the people who built the survey which we personally find many problems with. In Section \@ref(limitations), we will take a deep dive into this.
+In a similar fashion to what was explained in Section \@ref(implications-1), both of our graphs are heavily skewed towards higher income. In the case of current income, it is almost certainly because of the bin width decided on by the people who built the survey which we personally find many problems with. In Section \@ref(limitations), we will take a deep dive into this.
 
 
 ## Visuals 3
@@ -229,16 +227,15 @@ income16_born/income_born
 
 
 # Limitations
-In this limitations section, I want to focus on the data which is provided to us and have a  look into why it might not be easy to take the implications mentioned above at face value
+In this limitations section,wewant to focus on the data which is provided to us and have a  look into why it might not be easy to take the implications mentioned above at face value.
 
 ## Uneven Bin width for Income Groups.
-The first major flaw I've found in the data is that the bins that both the income at age 16 and current income are recorded in are not all the same size. For example, in the case of the the first bin has a size of 16 years, the second bin from ages 16 to 24 has width 9, the next two have width 19 with the last ranging in theory from 65 to infinity. Although it is possible to understand why the maintainers of the data choose to have a demarcation point of the bins at 65 and 16, it is very hard to understand why they opted to divide the interior portion into varying bin sizes.
+The first major flaw I've found in the data is that the bins that both the income at age 16 and current income are recorded in are not all the same size. For example, in the case of the current income variable, the the first bin has a size of \$1,000, the second bin has a width of \$1,999, the third returns to about \$1,000 and as we go higher up the echelon, we have seemingly random alterations in bin widths from \$1,000 to \$2,000 to \$5,000. This can cause serious problems in statistics and especially for purposes of analysis. 
 
-We know in data science that when plotting bar charts, the bin width can have a big implication on the presentation of the data and the things that we can infer about its distribution. If the bin width is too small or too large, we might reduce or add characteristics to the data that aren't actually representative of it.
+We know in data science that when plotting bar charts, the bin width can have a big implications on the presentation of the data and the things that we can infer about its distribution. If the bin width is too small, too large or uneven, we might reduce or add characteristics to the data that aren't actually representative of it. This will cause us to over-fit or under-fit a model when the time comes to create them. The other problem with the bin widths is that they are different from the income at age 16 to the current income. This is the subject of the following Section 5.2.
 
 ## Why cut off income at $25,000?
-use the us labor statistics data
-## Third discussion point
+According to a news release published by the United States Bureau of Labor Statistics (see the document called wkyeng.pdf in the literature folder in inputs), the median weekly income of US citizens in the 4th quarter of 2021 (furthest from the start of the pandemic) is $1,010. This information is from that of 116.3 million full-time wage and salary workers. If we do some basic mathematics to approximate the annual earning, we get a figure of over \$52,000 dollars per year. As such, we are unable to understand why the bins for current income have been designed as such. This is a major flaw in the technique used by the surveyers to collect the data. In section \@ref(next-steps)
 
 
 ## Next steps

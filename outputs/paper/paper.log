@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2022.3.20)  21 MAR 2022 19:45
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2022.3.20)  21 MAR 2022 21:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -490,7 +490,7 @@ LaTeX Warning: Reference `first-discussion-point' on page 2 undefined on input l
 LaTeX Warning: Reference `tab:tableofdata' on page 2 undefined on input line 128.
 
 
-Overfull \hbox (625.52081pt too wide) in paragraph at lines 134--147
+Overfull \hbox (32.02162pt too wide) in paragraph at lines 134--147
  [][] 
  []
 
@@ -552,16 +552,16 @@ Package rerunfilecheck Info: File `paper.out' has not changed.
 Here is how much of TeX's memory you used:
  11285 strings out of 480236
  174966 string characters out of 5895451
- 473117 words of memory out of 5000000
+ 469117 words of memory out of 5000000
  28973 multiletter control sequences out of 15000+600000
  535556 words of font info for 78 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  60i,8n,63p,1896b,368s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/home/labasada/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/home/labasada/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}</home/labasada/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></home/labasada/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></home/labasada/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx9.pfb></home/labasada/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></home/labasada/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></home/labasada/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></home/labasada/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr6.pfb></home/labasada/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb></home/labasada/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr9.pfb></home/labasada/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb>
-Output written on paper.pdf (11 pages, 320166 bytes).
+Output written on paper.pdf (11 pages, 320335 bytes).
 PDF statistics:
- 327 PDF objects out of 1000 (max. 8388607)
- 276 compressed objects within 3 object streams
+ 328 PDF objects out of 1000 (max. 8388607)
+ 277 compressed objects within 3 object streams
  65 named destinations out of 1000 (max. 500000)
  186 words of extra memory for PDF output out of 10000 (max. 10000000)
 
