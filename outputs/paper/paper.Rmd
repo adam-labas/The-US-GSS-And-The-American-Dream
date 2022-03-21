@@ -171,9 +171,7 @@ In Visuals \@ref(visual-1) we can see when we look into income16 that the majori
 As we speak about an increase in wealth over time, we next want to see if the birth place of ones grandparents has any impact on income due to the so called *generational wealth*.
 
 ## Visual 2
-As weve previously stated, the American
-\@ref(visual-2)
-
+As we have previously stated, the American dream is one which communicates the increase of wealth over time for hard working Americans, especially to the eyes of immigrants. As such, we will attempt to visualize the impact of grandparent immigration to the United States on the income of Americans.
 ```{r, fig.cap="write a figure caption here", echo = FALSE, fig.width=12, fig.height=10, message = F, warning = F}
 #fincome16 vs income grouped by where grandparents were born
 
@@ -198,8 +196,14 @@ income_grand <- ggplot(mapping = aes(x = factor(income_cat, level = level_income
 income16_grand/income_grand
 ```
 
+## Implications 2
+In the above visuals, we can see that in all the income groupings for both age 16 and current income, the largest subgrouping within each is people who have no grandparents born in the United states. The second largest group are usually those with 2 grandparents born in the United States. It is pretty logical that 2 grandparents follows after zero grandparents as it is easy to recognize that most people do not go abroad to marry and marry a friend or someone that they know locally, who is most likely to be born in the united states. We would speculate that a similar trend can be observed in other *immigrant* countries Like Canada or Sweeden. What is the most fascinating however is that the vast majority of people who answered the survey are first or second generation Americans, perhaps having grandparents or parents who immigrated to this country chasing the American Dream. 
 
-```{r, fig.cap="write a figure caption here", echo = FALSE, fig.width=12, fig.height=10, message = F, warning = F}
+In a similar fashion to what was explained in \@ref(implications-1), both of our graphs are heavily skewed towards higher income. In the case of current income, it is almost certainly because of the bin width decided on by the people who built the survey which we personally find many problems with. In Section \@ref(limitations), we will take a deep dive into this.
+
+
+## Visuals 3
+```{r echo=FALSE, fig.cap="write a figure caption here", fig.height=10, fig.width=12, message=FALSE, warning=FALSE}
 #family income at 16 grouped by where individual was born
 
 income16_born <- ggplot(mapping = aes(x = factor(income16_cat, level = level_income16), group = born, fill = born), data = reduced_data) +
@@ -225,16 +229,16 @@ income16_born/income_born
 
 
 
-
-
-
-
 # Limitations
+In this limitations section, I want to focus on the data which is provided to us and have a  look into why it might not be easy to take the implications mentioned above at face value
 
-## First discussion point
+## Uneven Bin width for Income Groups.
+The first major flaw I've found in the data is that the bins that both the income at age 16 and current income are recorded in are not all the same size. For example, in the case of the the first bin has a size of 16 years, the second bin from ages 16 to 24 has width 9, the next two have width 19 with the last ranging in theory from 65 to infinity. Although it is possible to understand why the maintainers of the data choose to have a demarcation point of the bins at 65 and 16, it is very hard to understand why they opted to divide the interior portion into varying bin sizes.
 
-## Second discussion point
+We know in data science that when plotting bar charts, the bin width can have a big implication on the presentation of the data and the things that we can infer about its distribution. If the bin width is too small or too large, we might reduce or add characteristics to the data that aren't actually representative of it.
 
+## Why cut off income at $25,000?
+use the us labor statistics data
 ## Third discussion point
 
 
