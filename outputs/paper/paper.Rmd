@@ -96,14 +96,14 @@ The 2021 GSS is in many ways different to the previous General Social Surveys in
 
 ## Key features & Pros And Cons of the Methodology and Survey
 
-It is important to discuss the reach of our data. We know from the provided documentation that the population group eligible for taking the survey are Adults 18 or older in the United States who live in non institutional housing at the time of interviewing. Also, the 2021 GSS  uses the last birthday method to decide which individual in the household will take the survey. This was done by having "a professional phone interviewer team conducted phone outreach to complete screeners, answer inbound phone calls from sampled households, identify respondents, and complete interviews by phone and/or prompt them to complete the web survey." As far as the invitation method goes for data collection, materials that provide a web link to invite people to participate in the survey was mailed out and an option to conduct the interview via the phone instead of a self-administered questionnaire was also provided. Out of the 27,591 lines of sample (people who had been prompted to answer the questionnaire), 4,032 responses were collected. This has implications on the finding of our analysis in Section \@ref(results) as we will have to consider if we are able to generalize our finding from the relatively small sample that we have to the population if all US citizens over 18 years old. The small sample size and extremely long survey are both weaknesses of the survey which we will discuss in more depth in Section \@ref(results).
+It is important to discuss the reach of our data. We know from the provided documentation that the population group eligible for taking the survey are Adults 18 or older in the United States who live in non institutional housing at the time of interviewing. Also, the 2021 GSS  uses the last birthday method to decide which individual in the household will take the survey. This was done by having "a professional phone interviewer team conducted phone outreach to complete screeners, answer inbound phone calls from sampled households, identify respondents, and complete interviews by phone and/or prompt them to complete the web survey." As far as the invitation method goes for data collection, materials that provide a web link to invite people to participate in the survey was mailed out and an option to conduct the interview via the phone instead of a self-administered questionnaire was also provided. Out of the 27,591 lines of sample (people who had been prompted to answer the questionnaire), 4,032 responses were collected. This has implications on the finding of our analysis in Section \@ref(discussion) as we will have to consider if we are able to generalize our finding from the relatively small sample that we have to the population if all US citizens over 18 years old. The small sample size and extremely long survey are both weaknesses of the survey which we will discuss in more depth in Section \@ref(results).
 
 In addition, the 2021 GSS used census data as well as publicly available information to try and identify areas and specific household with Spanish speakers whereby the survey was then offered in English and in Spanish. This is a big strength of the survey at it shows the attempt of the data analyst to be as mature and ethical as possible and offer the survey in a language that is more suitable for a large portion of US citizens.
 
 
 
 # Visualizing the Data and The Implications
-In this analysis, I am interested at looking at how real is the American Dream and if it is found to be possible, whether or not there is any difference in attainment amoung genders. As such, in this Section \@ref(visualizingthedataandtheimplications), we will create various visuals which will enable us to extract as much information as we can and we will speak about the implications that they make.
+In this analysis, I am interested at looking at how real is the American Dream and if it is found to be possible, whether or not there is any difference in attainment amoung genders. As such, in this Section \@ref(visualizing-the-data-and-the-implications), we will create various visuals which will enable us to extract as much information as we can and we will speak about the implications that they make.
 ```{r, echo = F, message = F, include = F}
 #creating levels for the x and y axis on the graphs
 
@@ -124,7 +124,7 @@ level_income <- c("$1,000 AND UNDER","$1,000 TO $2,999","$3,000 TO $3,999",
 ```
 
 ## Visual 1
-```{r figure-1, fig.cap="write a figure caption here", echo = FALSE, fig.width=12, fig.height=10, message = F, warning = F}
+```{r figure 1, fig.cap="write a figure caption here", echo = FALSE, fig.width=12, fig.height=10, message = F, warning = F}
 income16_gender <- ggplot(mapping = aes(x = factor(income16_cat, level = level_income16), group = sex, fill = sex), data = reduced_data) +
   geom_bar(alpha = 0.7)  +
   theme_minimal() +
@@ -135,10 +135,10 @@ income16_gender <- ggplot(mapping = aes(x = factor(income16_cat, level = level_i
   coord_flip()
 income16_gender
 ```
-In this graph (Figure \@ref(fig:figure-1)), we can proportions of family income when the responded was 16 years of age. We also see that an over-whelming majority of people in our sample had an income of over $40,000. We also see that the single largest individual group is the *NA* group. We will discuss the implications of this in Section \@ref(limitations1). As we've previously discussed, when the questioned is prompted with a question, in every situation, they have the option to refuse to answer the question or say that they do not know. The both of these are listed as NA responses. We also see that of the 5 possible genders (including the NA gender, not to be confused with the NA response to income16), the overwhelming majority of respondents identified as male or female as expected.
+In this graph (Figure \@ref(fig:figure-1)), we can proportions of family income when the responded was 16 years of age. We also see that an over-whelming majority of people in our sample had an income of over $40,000. We also see that the single largest individual group is the *NA* group. We will discuss the implications of this in Section \@ref(limitations). As we've previously discussed, when the questioned is prompted with a question, in every situation, they have the option to refuse to answer the question or say that they do not know. The both of these are listed as NA responses. We also see that of the 5 possible genders (including the NA gender, not to be confused with the NA response to income16), the overwhelming majority of respondents identified as male or female as expected.
 
 We would like to contrast this with the current income of responds. The below is the same graph above but we've also included a similar graph but for family income at the time of response 
-```{r figure-2, fig.cap="write a figure caption here", echo = FALSE, fig.width=12, fig.height=10, message = F, warning = F}
+```{r figure2, fig.cap="write a figure caption here", echo = FALSE, fig.width=12, fig.height=10, message = F, warning = F}
 #income16 vs income grouped by gender
 
 income16_gender <- ggplot(mapping = aes(x = factor(income16_cat, level = level_income16), group = sex, fill = sex), data = reduced_data) +
@@ -161,7 +161,10 @@ income_gender <- ggplot(mapping = aes(x = factor(income_cat, level = level_incom
 
 income16_gender/income_gender
 ```
-In figure \@ref(fig:figure-2), we see the overlapping of the two graphs, the first of which is the same as figure \@ref(fig:fig1) and the bottom one is the same in essence but with the information for current family income instead of at age 16. The first and most striking part of this visual is that for the current income, the highest thres
+In figure \@ref(fig:figure-2), we see the overlapping of the two graphs, the first of which is the same as figure \@ref(fig:figure-1) and the bottom one is the same in essence but with the information for current family income instead of at age 16. The first and most striking part of this visual is that for the current income, the highest threshold is $25,000 or more. We see that the both of our graphs are heavily skewed to wards higher incomes. I suspect that this is mainly a production of the bin widths decided on for the analysis. 
+
+## Implications 1
+In Visuals \@ref(visual-1) we can see when we look into income16 that the majority of people claimed that at the age of 16, their family income was over 40 thousand dollars. When we lookover at the income variable, we are trully perplexed to see that the largest is 25 thousand or more. We will discuss the implications of the latter in Section \@ref(limitations). We can also see that the number of NA responses rises from about 530 in the case of the income at age 16 variable to approximately 900 in the income variable. This seems counter intuitive as it would appear that less people are uncertain about their family income at age 16 than they are. We suspect however that this is not true. We suspect that there could be a possible shame or embarassment assosociated with sharing ones current faily income as it represents the persons way of living or lifestyle today. On the other hand, someones incomeat age 16 is psychologically less of importance to them and carries no burden in their life, as it is notan expected metric of succes year down the line. We also recognize that amongst men and women, there is a general 
 
 
 ```{r, fig.cap="write a figure caption here", echo = FALSE, fig.width=12, fig.height=10, message = F, warning = F}
@@ -232,17 +235,16 @@ income_income16_born
 
 
 
-# Discussion
+# Limitations
 
 ## First discussion point
-
-If my paper were 10 pages, then should be be at least 2.5 pages. The discussion is a chance to show off what you know and what you learnt from all this. 
 
 ## Second discussion point
 
 ## Third discussion point
 
-## Weaknesses and next steps
+
+## Next steps
 
 Weaknesses and next steps should also be included.
 
