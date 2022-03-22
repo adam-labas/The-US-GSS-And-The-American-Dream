@@ -16,7 +16,8 @@ bibliography: references.bib
 ```{r setup, fig.pos = "!H", include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 # install.packages("tinytex")
-# tinytex::install_tinytex()
+tinytex::install_tinytex()
+#install.packages("kabeExtra")
 library(tinytex)
 library(tidyverse)
 library(janitor)
@@ -25,20 +26,27 @@ library(tidyr)
 library(knitr)
 library(patchwork)
 library(lubridate)
-
+library(kableExtra)
 reduced_data <- read_csv(here::here("inputs/data/reduced_data.csv"))
 
 ```
 
+\newpage
 # Introduction
 
-You can and should cross-reference sections and sub-sections. For instance, Section \@ref(data). R Markdown automatically makes the sections lower case and adds a dash to spaces to generate labels, for instance, Section \@ref(first-discussion-point). 
+If you ask a group of first graders what they aspire to be when they grow up, it wouldn't be surprising to hear a lot of kids say that they would want to be the richest person in the world. For as long as humanity has existed, the allure and pride associated with wealth and the accumulation of large sums of wealth has always been at the forefront of the social and economic paradigm. Whether it was Mansa Musa in East Africa in the 14th century or Jeff Bezos today, the wealthy have always stood out in large crowds. This aspect of the social sphere is one that can undoubtedly be found in American livelihood. It would be hard to deny for any of us that money rules the world, regardless of how we feel about that. We need it to put food on our tables, clothes on our backs and seemingly to increase our quality of life. As such, it would appear as if a surplus of money in ones possession could do no harm.
+
+For the last 50 years, people from all over the world have began to flock to the United States as immigrants in search of the so called American Dream. The American Dream is a Utopian idea in which the United States of America is a safe haven for all those looking to improve their quality of life via monetary gain. It implies that anyone (yes, absolutely anyone) who is willing to put in the hard work required to be successful, will have much improves abilities to make something of themselves in the United States than they could elsewhere, all else being equal.
+
+In this analysis, we got our hands on some of the 2021 United States General Social Survey data which is described with great extent in the Data Section \@ref(data). In our analysis, we decided to focus on how the various factors and trends in the data in order to try and gather some implications on the veracity of the american dream. To further break down the analysis, we decided to look into the distribution of the aforementioned data by segregating the data not only by the current income of respondents but also by their income at age 16, and trying to see if we can spot any relation between an increase in income from age 16 to now and the gender, or the number of grandparents of the respondent, born in the United States. 
+
+In this paper, we will attempt to take you on a journey to explore the data that was used to produce the findings, we will visually present to you the findings and we will speak about the implications of the findings and later on in the Limitations Section \@ref(limitations), we will discuss the limitations of our data and problems that this may have when wanting to extract true, ethical, unbiased information from the implications of the findings.
 
 
-
+\pagebreak
 # Data
 In this Data Section \@ref(data), we will provide a look into the data acquisition and processing methodology as well as a deep dive into the contents of the data. First of, (Table \@ref(tab:tableofdata)) give us a glimpse of the data.
-```{r tableofdata, echo = F}
+```{r tableofdata, echo = F, fig.pos = "!H"}
 #table of variables that i am concerned with
 data_table <- reduced_data[,-c(1,6,8)]
 
@@ -52,7 +60,9 @@ data_table[complete.cases(data_table), ] %>%
                   "Income at 16","Current Income"),
     digits = 1,
     booktabs = TRUE,  
-    linesep = "")
+    linesep = "") %>% 
+  kable_styling(latex_options = "HOLD_position")
+
 ```
 
 
@@ -98,8 +108,7 @@ It is important to discuss the reach of our data. We know from the provided docu
 
 In addition, the 2021 GSS used census data as well as publicly available information to try and identify areas and specific household with Spanish speakers whereby the survey was then offered in English and in Spanish. This is a big strength of the survey at it shows the attempt of the data analyst to be as mature and ethical as possible and offer the survey in a language that is more suitable for a large portion of US citizens.
 
-
-
+\pagebreak
 # Visualizing the Data and The Implications
 In this analysis, we am interested at looking at how real the American Dream is and if it is found to be possible, whether or not there is any difference in attainment amoung genders. As such, in this Section \@ref(visualizing-the-data-and-the-implications), we will create various visuals which will enable us to extract as much information as we can and we will speak about the implications that they make.
 ```{r, echo = F, message = F, include = F}
@@ -122,7 +131,7 @@ level_income <- c("$1,000 AND UNDER","$1,000 TO $2,999","$3,000 TO $3,999",
 ```
 
 ## Visual 1
-```{r figure 1, fig.cap="write a figure caption here", echo = FALSE, fig.width=12, fig.height=10, message = F, warning = F}
+```{r figure-1, fig.cap="write a figure caption here", echo = FALSE, fig.width=11, fig.height=9, message = F, warning = F}
 income16_gender <- ggplot(mapping = aes(x = factor(income16_cat, level = level_income16), group = sex, fill = sex), data = reduced_data) +
   geom_bar(alpha = 0.7)  +
   theme_minimal() +
@@ -133,10 +142,10 @@ income16_gender <- ggplot(mapping = aes(x = factor(income16_cat, level = level_i
   coord_flip()
 income16_gender
 ```
-In this graph (Figure \@ref(fig:figure-1)), we can see the proportions of family income when the responded was 16 years of age. We also see that an over-whelming majority of people in our sample had an income of over $40,000. We also see that the single largest individual group is the *NA* group. We will discuss the implications of this in Section \@ref(limitations). As we've previously discussed, when the questioned is prompted with a question, in every situation, they have the option to refuse to answer the question or say that they do not know. The both of these are listed as NA responses. We also see that of the 5 possible genders (including the NA gender, not to be confused with the NA response to income16), the overwhelming majority of respondents identified as male or female as expected.
+In this graph (Figure 1), we can see the proportions of family income when the responded was 16 years of age. We also see that an over-whelming majority of people in our sample had an income of over $40,000. We also see that the single largest individual group is the *NA* group. We will discuss the implications of this in Section \@ref(limitations). As we've previously discussed, when the questioned is prompted with a question, in every situation, they have the option to refuse to answer the question or say that they do not know. The both of these are listed as NA responses. We also see that of the 5 possible genders (including the NA gender, not to be confused with the NA response to income16), the overwhelming majority of respondents identified as male or female as expected.
 
 We would like to contrast this with the current income of responds. Below is the same graph as above, but we've also included a similar graph  for family income at the time of response.
-```{r figure2, fig.cap="write a figure caption here", echo = FALSE, fig.width=12, fig.height=10, message = F, warning = F}
+```{r figure2, fig.cap="Comparing proportions of current income and income at age 16, grouping by gender", echo = FALSE, fig.width=12, fig.height=10, message = F, warning = F}
 #income16 vs income grouped by gender
 
 income16_gender <- ggplot(mapping = aes(x = factor(income16_cat, level = level_income16), group = sex, fill = sex), data = reduced_data) +
@@ -159,7 +168,7 @@ income_gender <- ggplot(mapping = aes(x = factor(income_cat, level = level_incom
 
 income16_gender/income_gender
 ```
-In figure \@ref(fig:figure2), we see the overlapping of the two graphs, the first of which is the same as figure \@ref(fig:figure-1) and the bottom one is the same in essence but with the information for current family income instead of at age 16. The first and most striking part of this visual is that for the current income, the highest threshold is $25,000 or more. We see that the both of our graphs are heavily skewed to wards higher incomes. We suspect that this is mainly a production of the bin widths decided on for the analysis. 
+In Figure 2, we see the overlapping of the two graphs, the first of which is the same as Figure 1 and the bottom one is the same in essence but with the information for current family income instead of at age 16. The first and most striking part of this visual is that for the current income, the highest threshold is $25,000 or more. We see that the both of our graphs are heavily skewed to wards higher incomes. We suspect that this is mainly a production of the bin widths decided on for the analysis. 
 
 ## Implications 1
 In Visuals \@ref(visual-1) we can see that when we look into income16  the majority of people claimed that at the age of 16, their family income was over 40 thousand dollars. When we look over at the income variable, we are truly perplexed to see that the largest bin is 25 thousand or more. We will discuss the implications of the latter in Section \@ref(limitations). We can also see that the number of NA responses rises from about 530 in the case of the income at age 16 variable to approximately 900 in the income variable. This seems counter intuitive as it would appear that less people are uncertain about their family income at age 16 than they are now. We suspect however that this is not true. We suspect that there could be a possible shame or embarrassment associated with sharing ones current family income as it represents the persons way of living or lifestyle today. When we speak of the American dream, we implicitly assume an increase in wealth over time and for someone who isn't as wealthy as they might want to be (likely an overwhelming large portion of the population), reluctance with sharing their current income is totally understandable. On the other hand, someones income at age 16 is psychologically less of importance to them and carries no burden in their life, as it is not an expected metric of success years down the line. We also recognize that among men and women, there is in general almost a 50:50 split at each level of income but we do notice that for income level NA, a lot of people chose not to identify their gender. It would be interesting in another analysis to analyse possible evidences of gender pay gap and how people who do not fit in the *traditional* gender roles are affected by the advent of the American Dream and whether or not their position in life hinders their ability to increase in wealth over time. 
@@ -168,7 +177,7 @@ As we speak about an increase in wealth over time, we next want to see if the bi
 
 ## Visual 2
 As we have previously stated, the American dream is one which communicates the increase of wealth over time for hard working Americans, especially to the eyes of immigrants. As such, we will attempt to visualize the impact of grandparent immigration to the United States on the income of Americans.
-```{r, fig.cap="write a figure caption here", echo = FALSE, fig.width=12, fig.height=10, message = F, warning = F}
+```{r, fig.cap="Comparing proportions of current income and income at age 16, grouping by number of US born grandparents", echo = FALSE, fig.width=12, fig.height=10, message = F, warning = F}
 #fincome16 vs income grouped by where grandparents were born
 
 income16_grand <- ggplot(mapping = aes(x = factor(income16_cat, level = level_income16), group = granborn, fill = granborn), data = reduced_data) +
@@ -199,7 +208,7 @@ In a similar fashion to what was explained in Section \@ref(implications-1), bot
 
 
 ## Visuals 3
-```{r, echo=FALSE, fig.cap="write a figure caption here", fig.height=10, fig.width=12, message=FALSE, warning=FALSE}
+```{r, echo=FALSE, fig.cap="Comparing proportions of current income and income at age 16, grouping by US born grandparents or not", fig.height=10, fig.width=12, message=FALSE, warning=FALSE}
 #family income at 16 grouped by where individual was born
 
 income16_born <- ggplot(mapping = aes(x = factor(income16_cat, level = level_income16), group = born, fill = born), data = reduced_data) +
@@ -240,9 +249,11 @@ According to a news release published by the United States Bureau of Labor Stati
 As we have reported in Section \@ref(key-features-pros-and-cons-of-the-methodology-and-survey), out of the 27,591 lines of sample (people who had been prompted to answer the questionnaire), 4,032 responses were collected. This means that for the 2021 GSS, the response rate was at 17.4 percent (see calculation on page 28 of the "GSS 2021 Codebook R1b.pdf"). The United States has a population of over 330 million and even if all the people who had been prompted to answer the survey had responded it, the survey would only represent less than $8.36 \times 10^{-3}$ percent of the population. It is quite reasonable that as such, it would be hard to make generalizations for the entire adult united states population.
 
 ## Next steps
-Following on from the latter section, we can make some pretty good suggestions on ways to improve the survey and subsequently, the data and the implications of the findings, so that they will be less ambiguous and more ethical to use with confidence. First off, having the data in predetermined bins is problematic from the perspective of the data analyst. We can start by creating even bins that respondents can answer but we can also allow the respondents to provide their exact income. The latter solution will give us more data, and it gives more options to the data analysis to conduct a reproducible analysis. In this manner, the data scientist who gets a hold of the data will have the liberty to conduct his analysis and chose the bins which work best for the task he is working on, instead of being obstructed by barriers built into the data. 
+Following on from the latter section, we can make some pretty good suggestions on ways to improve the survey and subsequently, the data and the implications of the findings, so that they will be less ambiguous and more ethical to use with confidence. First off, having the data in predetermined bins is problematic from the perspective of the data analyst. We can start by creating even bins that respondents can answer but we can also allow the respondents to provide their exact income. The latter solution will give us more data, and it gives more options to the data analysis to conduct a reproducible analysis. In this manner, the data scientist who gets a hold of the data will have the liberty to conduct his analysis and chose the bins which work best for the task he is working on, instead of being obstructed by barriers built into the data. To account for some of these changes, we have created a supplementary survey which collects a lot of the data we were interested in for this analysis. It stands independently from the 2021 US GSS. See the Appendix for the survey and additional information.
 
- ewwrw
+
+
+
 \newpage
 
 \appendix
