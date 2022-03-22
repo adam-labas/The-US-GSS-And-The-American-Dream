@@ -38,7 +38,7 @@ You can and should cross-reference sections and sub-sections. For instance, Sect
 
 # Data
 In this Data Section \@ref(data), we will provide a look into the data acquisition and processing methodology as well as a deep dive into the contents of the data. First of, (Table \@ref(tab:tableofdata)) give us a glimpse of the data.
-```{r echo = F}
+```{r tableofdata, echo = F}
 #table of variables that i am concerned with
 data_table <- reduced_data[,-c(1,6,8)]
 
@@ -53,7 +53,6 @@ data_table[complete.cases(data_table), ] %>%
     digits = 1,
     booktabs = TRUE,  
     linesep = "")
-
 ```
 
 
@@ -93,9 +92,9 @@ In matters of reproducibility, the methodology used to collect data is always im
 
 The 2021 GSS is in many ways different to the previous General Social Surveys in years prior to the ascension of the corona virus to international stardom. According to the GSS 2021 Codebook R1b, in previous iterations of the GSS, the survey was taken solely via in-person interview, where the interviewer had been adequately trained and prepared for various situations that would have arose like non responses or the person being interviewed not knowing an answer. However, for reasons related to health and safety protocols and "to safeguard the health of staff and respondents during the COVID-19 pandemic, the 2021 GSS data collection used a mail-to-web methodology instead of its traditional in-person interviews." This means that after being selected via address based sampling the selected individual's "interview" would be conducted online via a self administered questionnaire. The limitations of such will later be discussed in Section \@ref(limitations)
 
-## Key features & Pros And Cons of the Methodology and Survey
+## Key features Pros And Cons of the Methodology and Survey
 
-It is important to discuss the reach of our data. We know from the provided documentation that the population group eligible for taking the survey are adults 18 or older in the United States who live in non institutional housing at the time of interviewing. Also, the 2021 GSS  uses the last birthday method to decide which individual in the household will take the survey. This was done by having "a professional phone interviewer team conducted phone outreach to complete screeners, answer inbound phone calls from sampled households, identify respondents, and complete interviews by phone and/or prompt them to complete the web survey." As far as the invitation method goes for data collection, materials that provide a web link to invite people to participate in the survey was mailed out and an option to conduct the interview via the phone instead of a self-administered questionnaire was also provided. Out of the 27,591 lines of sample (people who had been prompted to answer the questionnaire), 4,032 responses were collected. This has implications on the finding of our analysis in Section \@ref(limitations) as we will have to consider if we are able to generalize our finding from the relatively small sample that we have to the population of all US citizens over 18 years old. The small sample size and extremely long survey are both weaknesses of the survey which we will discuss in more depth in Section \@ref(limitations).
+It is important to discuss the reach of our data. We know from the provided documentation that the population group eligible for taking the survey are adults 18 or older in the United States who live in non institutional housing at the time of interviewing. Also, the 2021 GSS  uses the last birthday method to decide which individual in the household will take the survey. This was done by having "a professional phone interviewer team conducted phone outreach to complete screeners, answer inbound phone calls from sampled households, identify respondents, and complete interviews by phone and/or prompt them to complete the web survey." As far as the invitation method goes for data collection, materials that provide a web link to invite people to participate in the survey was mailed out and an option to conduct the interview via the phone instead of a self-administered questionnaire was also provided. Out of the 27,591 lines of sample (people who had been prompted to answer the questionnaire), 4,032 responses were collected. This has implications on the finding of our analysis in Section \@ref(limitations) as we will have to consider if we are able to generalize our finding from the relatively small sample that we have to the population of all US citizens over 18 years old. The small sample size and extremely long survey are both weaknesses of the survey which we will discuss in more depth in Section \@ref(small-sample-size).
 
 In addition, the 2021 GSS used census data as well as publicly available information to try and identify areas and specific household with Spanish speakers whereby the survey was then offered in English and in Spanish. This is a big strength of the survey at it shows the attempt of the data analyst to be as mature and ethical as possible and offer the survey in a language that is more suitable for a large portion of US citizens.
 
@@ -160,7 +159,7 @@ income_gender <- ggplot(mapping = aes(x = factor(income_cat, level = level_incom
 
 income16_gender/income_gender
 ```
-In figure \@ref(fig:figure-2), we see the overlapping of the two graphs, the first of which is the same as figure \@ref(fig:figure-1) and the bottom one is the same in essence but with the information for current family income instead of at age 16. The first and most striking part of this visual is that for the current income, the highest threshold is $25,000 or more. We see that the both of our graphs are heavily skewed to wards higher incomes.wesuspect that this is mainly a production of the bin widths decided on for the analysis. 
+In figure \@ref(fig:figure2), we see the overlapping of the two graphs, the first of which is the same as figure \@ref(fig:figure-1) and the bottom one is the same in essence but with the information for current family income instead of at age 16. The first and most striking part of this visual is that for the current income, the highest threshold is $25,000 or more. We see that the both of our graphs are heavily skewed to wards higher incomes. We suspect that this is mainly a production of the bin widths decided on for the analysis. 
 
 ## Implications 1
 In Visuals \@ref(visual-1) we can see that when we look into income16  the majority of people claimed that at the age of 16, their family income was over 40 thousand dollars. When we look over at the income variable, we are truly perplexed to see that the largest bin is 25 thousand or more. We will discuss the implications of the latter in Section \@ref(limitations). We can also see that the number of NA responses rises from about 530 in the case of the income at age 16 variable to approximately 900 in the income variable. This seems counter intuitive as it would appear that less people are uncertain about their family income at age 16 than they are now. We suspect however that this is not true. We suspect that there could be a possible shame or embarrassment associated with sharing ones current family income as it represents the persons way of living or lifestyle today. When we speak of the American dream, we implicitly assume an increase in wealth over time and for someone who isn't as wealthy as they might want to be (likely an overwhelming large portion of the population), reluctance with sharing their current income is totally understandable. On the other hand, someones income at age 16 is psychologically less of importance to them and carries no burden in their life, as it is not an expected metric of success years down the line. We also recognize that among men and women, there is in general almost a 50:50 split at each level of income but we do notice that for income level NA, a lot of people chose not to identify their gender. It would be interesting in another analysis to analyse possible evidences of gender pay gap and how people who do not fit in the *traditional* gender roles are affected by the advent of the American Dream and whether or not their position in life hinders their ability to increase in wealth over time. 
@@ -200,7 +199,7 @@ In a similar fashion to what was explained in Section \@ref(implications-1), bot
 
 
 ## Visuals 3
-```{r echo=FALSE, fig.cap="write a figure caption here", fig.height=10, fig.width=12, message=FALSE, warning=FALSE}
+```{r, echo=FALSE, fig.cap="write a figure caption here", fig.height=10, fig.width=12, message=FALSE, warning=FALSE}
 #family income at 16 grouped by where individual was born
 
 income16_born <- ggplot(mapping = aes(x = factor(income16_cat, level = level_income16), group = born, fill = born), data = reduced_data) +
@@ -227,20 +226,22 @@ income16_born/income_born
 
 
 # Limitations
-In this limitations section,wewant to focus on the data which is provided to us and have a  look into why it might not be easy to take the implications mentioned above at face value.
+In this limitations section,we want to focus on the data which is provided to us and have a  look into why it might not be easy to take the implications mentioned above at face value.
 
 ## Uneven Bin width for Income Groups.
-The first major flaw I've found in the data is that the bins that both the income at age 16 and current income are recorded in are not all the same size. For example, in the case of the current income variable, the the first bin has a size of \$1,000, the second bin has a width of \$1,999, the third returns to about \$1,000 and as we go higher up the echelon, we have seemingly random alterations in bin widths from \$1,000 to \$2,000 to \$5,000. This can cause serious problems in statistics and especially for purposes of analysis. 
+The first major flaw I've found in the data is that the bins that both the of the current income variable, the the first bin has a size of \$1,000, the second bin has a width of \$1,999, the third returns to about \$1,000 and as we go higher up the echelon, we have seemingly random alterations in bin widths from \$1,000 to \$2,000 to \$5,000. This can cause serious problems in statistics and especially for purposes of analysis. 
 
 We know in data science that when plotting bar charts, the bin width can have a big implications on the presentation of the data and the things that we can infer about its distribution. If the bin width is too small, too large or uneven, we might reduce or add characteristics to the data that aren't actually representative of it. This will cause us to over-fit or under-fit a model when the time comes to create them. The other problem with the bin widths is that they are different from the income at age 16 to the current income. This is the subject of the following Section 5.2.
 
 ## Why cut off income at $25,000?
-According to a news release published by the United States Bureau of Labor Statistics (see the document called wkyeng.pdf in the literature folder in inputs), the median weekly income of US citizens in the 4th quarter of 2021 (furthest from the start of the pandemic) is $1,010. This information is from that of 116.3 million full-time wage and salary workers. If we do some basic mathematics to approximate the annual earning, we get a figure of over \$52,000 dollars per year. As such, we are unable to understand why the bins for current income have been designed as such. This is a major flaw in the technique used by the surveyers to collect the data. In section \@ref(next-steps)
+According to a news release published by the United States Bureau of Labor Statistics (see the document called wkyeng.pdf in the literature folder in inputs), the median weekly income of US citizens in the 4th quarter of 2021 (furthest from the start of the pandemic) is $1,010. This information is from that of 116.3 million full-time wage and salary workers. If we do some basic mathematics to approximate the annual earning, we get a figure of over \$52,000 dollars per year. As such, we are unable to understand why the bins for current income have been designed as such. This is a major flaw in the technique used by the surveyors to collect the data. In section \@ref(next-steps), we will discuss ways that the survey could improve on this.
 
+## Small sample size
+As we have reported in Section \@ref(key-features-pros-and-cons-of-the-methodology-and-survey), out of the 27,591 lines of sample (people who had been prompted to answer the questionnaire), 4,032 responses were collected. This means that for the 2021 GSS, the response rate was at 17.4 percent (see calculation on page 28 of the "GSS 2021 Codebook R1b.pdf"). The United States has a population of over 330 million and even if all the people who had been prompted to answer the survey had responded it, the survey would only represent less than $8.36 \times 10^{-3}$ percent of the population. It is quite reasonable that as such, it would be hard to make generalizations for the entire adult united states population.
 
 ## Next steps
+Following on from the latter section, we can make some pretty good suggestions on ways to improve the survey and subsequently, the data and the implications of the findings, so that they will be less ambiguous and more ethical to use with confidence. First off, having the data in predetermined bins is problematic from the perspective of the data analyst. We can start by creating even bins that respondents can answer but we can also allow the respondents to provide their exact income. The latter solution will give us more data, and it gives more options to the data analysis to conduct a reproducible analysis. In this manner, the data scientist who gets a hold of the data will have the liberty to conduct his analysis and chose the bins which work best for the task he is working on, instead of being obstructed by barriers built into the data. 
 
-Weaknesses and next steps should also be included.
 
 \newpage
 
