@@ -242,7 +242,7 @@ As we have reported in Section \@ref(key-features-pros-and-cons-of-the-methodolo
 ## Next steps
 Following on from the latter section, we can make some pretty good suggestions on ways to improve the survey and subsequently, the data and the implications of the findings, so that they will be less ambiguous and more ethical to use with confidence. First off, having the data in predetermined bins is problematic from the perspective of the data analyst. We can start by creating even bins that respondents can answer but we can also allow the respondents to provide their exact income. The latter solution will give us more data, and it gives more options to the data analysis to conduct a reproducible analysis. In this manner, the data scientist who gets a hold of the data will have the liberty to conduct his analysis and chose the bins which work best for the task he is working on, instead of being obstructed by barriers built into the data. 
 
-
+ ewwrw
 \newpage
 
 \appendix
