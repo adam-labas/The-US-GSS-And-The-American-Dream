@@ -1,4 +1,4 @@
-#### Preamble dksbcasvkfvkcssf####
+#### Preamble ####
 # Purpose: Prepare the 2021 GSS data
 # Author: Adam Labas and Krupali Bhavsar
 # Data: March 20 2022
