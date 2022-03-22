@@ -1,5 +1,5 @@
 ---
-title: "Income Has Serious Implications On Many Facets of American Life in 2021"
+title: "Income Has Serious Implications On Many Facets of American Life in 2021."
 subtitle: "A Look Into The Implications of Americans' Incomes Reveals Information On The Veracity of American Dream."
 author: 
   - Adam Labas  
